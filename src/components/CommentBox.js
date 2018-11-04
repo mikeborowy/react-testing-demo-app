@@ -2,8 +2,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {saveComment, fetchComments} from 'reducers/comments';
-// import {bindActionCreators} from 'redux';
+import {onSaveComment, onFetchComments} from 'reducers/comments';
+import authWrapper from './helpers/authWrapper';
 
 const propTypes = {
 };
@@ -23,7 +23,7 @@ class CommentBox extends React.Component {
 
     handleSubmit = (evt) => {
         evt.preventDefault();
-        this.props.saveComment(this.state.comment);
+        this.props.onSaveComment(this.state.comment);
         this.setState({comment: ''});
     }
 
@@ -39,28 +39,25 @@ class CommentBox extends React.Component {
                         <button>Subbmit comment</button>
                     </div>
                 </form>
-                <button className="fetch-comments-btn" onClick={this.props.fetchComments}>Fetch comment</button>
+                <button className="fetch-comments-btn" onClick={this.props.onFetchComments}>Fetch comment</button>
             </div>
         );
     }
 }
 
+const CommentBoxWithAuth = authWrapper(CommentBox);
+
 CommentBox.propTypes = propTypes;
 CommentBox.defaultProps = defaultProps;
 
-// function mapStateToProps(state) {
-//   return {
-//   };
-// }
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ 
-    saveComment, 
-    fetchComments
+    onSaveComment, 
+    onFetchComments
   }, dispatch);
 }
 
 export default connect(
-  null, 
-  mapDispatchToProps
-)(CommentBox);
+    null, 
+    mapDispatchToProps
+)(CommentBoxWithAuth);
