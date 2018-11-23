@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import moxios from 'moxios';
-import Root from 'Root';
+import Root from 'store';
 import App from 'components/App';
 
 beforeEach( () => {

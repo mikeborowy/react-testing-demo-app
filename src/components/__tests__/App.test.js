@@ -1,5 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import Root from 'store';
 import App from 'components/App';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
@@ -7,7 +8,7 @@ import CommentList from 'components/CommentList';
 let component;
 
 beforeEach( () => {
-    component = shallow(<App />);
+    component = shallow(<App/>);
 });
 
 it('shows comment box', () => {

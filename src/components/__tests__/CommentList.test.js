@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import Root from 'Root';
+import Root from 'store';
 import CommentList from 'components/CommentList';
 
 let component;

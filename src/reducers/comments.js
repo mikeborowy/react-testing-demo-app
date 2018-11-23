@@ -3,7 +3,7 @@ import axios from 'axios';
 export const SAVE_COMMENT = 'SAVE_COMMENT';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 //Action creators
-export const onSaveComment = (comment) => ({type: SAVE_COMMENT, comment});
+export const onSaveComment = (comment) => ({type: SAVE_COMMENT, payload: comment});
 export const onFetchComments = () => {
     const response = axios.get('http://jsonplaceholder.typicode.com/comments');
     return {
@@ -15,7 +15,7 @@ export const onFetchComments = () => {
 export const comments = (state = [], action) => {
     switch(action.type){
         case SAVE_COMMENT:
-            return [...state, action.comment];
+            return [...state, action.payload, {}];
         case FETCH_COMMENTS:
             const comments = action.payload.data.map( comment => comment.name );
             return [...state, ...comments]

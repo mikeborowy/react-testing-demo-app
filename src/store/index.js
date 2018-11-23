@@ -1,11 +1,22 @@
 /*eslint-disable no-alert, no-console */
+import React from 'react';
+import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reduxPromise from 'redux-promise';
 import rootReducers from 'reducers';
+import async from 'middlewares/async';
+import stateValidator from 'middlewares/stateValidator';
 
-export default function initStore(initialState) {
-  return createStore(
-    rootReducers,
-    initialState,
-    applyMiddleware(reduxPromise)
-)};
+export default ({ children, initialState = {} }) => {
+    const initStore = createStore(
+        rootReducers,
+        initialState,
+        applyMiddleware(async,stateValidator)
+    )
+
+    return(
+        <Provider store={initStore}>
+            {children}
+        </Provider> 
+    );
+};
